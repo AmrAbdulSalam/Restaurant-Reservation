@@ -231,7 +231,17 @@ namespace RestaurantReservation
                     Console.WriteLine("*****");
                 }
             }
-            //
+            //Task 10 (D) --> List Orders Menu
+            using (var context = new RestaurantReservationDbContext())
+            {
+                var repo = new MenuItemsRepository(context);
+                var menus = await repo.ListOrderedMenuItems(2);
+
+                foreach (var menu in menus)
+                {
+                    Console.WriteLine($"Name={menu.Name} , Description={menu.Description}");
+                }
+            }
         }
     }
 }
