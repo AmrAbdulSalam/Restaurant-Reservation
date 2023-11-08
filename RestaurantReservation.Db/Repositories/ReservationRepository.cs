@@ -1,4 +1,5 @@
-﻿using RestaurantReservation.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantReservation.Db.Models;
 
 namespace RestaurantReservation.Db.Repositories
 {
@@ -29,6 +30,14 @@ namespace RestaurantReservation.Db.Repositories
         {
             _context.Reservations.Update(updateReservation);
             await _context.SaveChangesAsync();
+        }
+        public async Task<List<Reservations>> GetReservationsByCustomer(int customerId)
+        {
+            var reservations = await _context.Reservations
+                .Where(a => a.CustomersId == customerId)
+                .OrderBy(a => a.ReservationDate)
+                .ToListAsync();
+            return reservations;
         }
     }
 }

@@ -203,6 +203,17 @@ namespace RestaurantReservation
                     Console.WriteLine($"Name={manger.FirstName} {manger.LastName}");
                 }
             }
+            //Task 10 (B) --> Reservation List by Customer ID
+            using (var context = new RestaurantReservationDbContext())
+            {
+                var repo = new ReservationRepository(context);
+                var reservations = await repo.GetReservationsByCustomer(1);
+                foreach (var reservation in reservations)
+                {
+                    Console.WriteLine($"Date={reservation.ReservationDate} , Size = {reservation.PartySize}");
+                }
+            }
+            //
         }
     }
 }
