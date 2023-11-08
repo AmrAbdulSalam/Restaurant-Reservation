@@ -213,6 +213,24 @@ namespace RestaurantReservation
                     Console.WriteLine($"Date={reservation.ReservationDate} , Size = {reservation.PartySize}");
                 }
             }
+            //Task 10 (C) --> List Orders And Menu Items
+            using (var context = new RestaurantReservationDbContext())
+            {
+                var repo = new OrdersRepository(context);
+                var orders = await repo.ListOrdersAndMenuItems(1);
+                foreach (var order in orders)
+                {
+                    Console.WriteLine($"OrderAmount={order.TotalAmount} , OrderDate={order.OrderDate}");
+                    foreach (var item in order.OrderItemsId)
+                    {
+                        Console.WriteLine($"Quantity = {item.Quantity}\n" +
+                            $"Name = {item.MenuItems.Name}\n" +
+                            $"Description = {item.MenuItems.Description}"
+                        );
+                    }
+                    Console.WriteLine("*****");
+                }
+            }
             //
         }
     }
