@@ -192,6 +192,17 @@ namespace RestaurantReservation
 
                 await repo.DeleteMenuItem(id);
             }
+
+            //Task 10 (A)  --> ListManagers()
+            using (var context = new RestaurantReservationDbContext())
+            {
+                var repo = new EmployeesRepository(context);
+                var manageers = await repo.ListManagers();
+                foreach (var manger in manageers)
+                {
+                    Console.WriteLine($"Name={manger.FirstName} {manger.LastName}");
+                }
+            }
         }
     }
 }
