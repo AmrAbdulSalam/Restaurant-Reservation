@@ -242,6 +242,15 @@ namespace RestaurantReservation
                     Console.WriteLine($"Name={menu.Name} , Description={menu.Description}");
                 }
             }
+
+            //Task 10 (C) --> Average total amount for each employee
+            using (var context = new RestaurantReservationDbContext())
+            {
+                var repo = new OrdersRepository(context);
+                var average = repo.CalculateAverageOrderAmount(1);
+                Console.WriteLine($"Average is {average}");
+
+            }
         }
     }
 }
