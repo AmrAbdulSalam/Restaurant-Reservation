@@ -2,6 +2,7 @@
 using RestaurantReservation.Db;
 using RestaurantReservation.Db.Models;
 using RestaurantReservation.Db.Repositories;
+using RestaurantReservation.Db.Services;
 
 namespace RestaurantReservation
 {
@@ -277,6 +278,14 @@ namespace RestaurantReservation
                         $"RestaurantName={employee.Name} , OpeningTime={employee.OpeningHours}"
                         );
                 }
+            }
+            //Task 12 Create DataBase Function to calculate total revenu
+            using (var context = new RestaurantReservationDbContext())
+            {
+                var restaurantId = 1;
+                var restaurantService = new RestaurantService(context);
+                var value = restaurantService.CalculateTotalRevenure(restaurantId);
+                Console.WriteLine($"Total={value} by restaurant = {restaurantId}");
             }
         }
     }
