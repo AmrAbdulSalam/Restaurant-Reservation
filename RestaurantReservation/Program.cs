@@ -287,6 +287,17 @@ namespace RestaurantReservation
                 var value = restaurantService.CalculateTotalRevenure(restaurantId);
                 Console.WriteLine($"Total={value} by restaurant = {restaurantId}");
             }
+            //Task 13 Using Procedure
+            using (var context = new RestaurantReservationDbContext())
+            {
+                Console.WriteLine("test");
+                var customerService = new CustomerService(context);
+                var customers = await customerService.CustomersWithSpecificReservationPartySize("small");
+                foreach (var customer in customers)
+                {
+                    Console.WriteLine($"Name={customer.FirstName} ");
+                }
+            }
         }
     }
 }
