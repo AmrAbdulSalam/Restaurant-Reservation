@@ -1,4 +1,5 @@
-﻿using RestaurantReservation.Db;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantReservation.Db;
 using RestaurantReservation.Db.Models;
 using RestaurantReservation.Db.Repositories;
 
@@ -250,6 +251,32 @@ namespace RestaurantReservation
                 var average = repo.CalculateAverageOrderAmount(1);
                 Console.WriteLine($"Average is {average}");
 
+            }
+
+            //Task 11 (1) Reservation With Customer and Restaurant Information
+            using (var context = new RestaurantReservationDbContext())
+            {
+                var resrvations = await context.View_ReservationsWithCustomerAndRestaurantInfo.ToListAsync();
+                foreach (var resrvation in resrvations)
+                {
+                    Console.WriteLine(
+                        $"PartySize={resrvation.PartySize} , For={resrvation.FullName}" +
+                        $"RestaurantName={resrvation.Name} , OpeningTime={resrvation.OpeningHours}"
+                        );
+                }
+            }
+
+            //Task 11 (2) Employees with thier respective restaurant info
+            using (var context = new RestaurantReservationDbContext())
+            {
+                var employees = await context.View_EmployeesWithRespectiveRestaurant.ToListAsync();
+                foreach (var employee in employees)
+                {
+                    Console.WriteLine(
+                        $"PartySize={employee.Position} , For={employee.FullName}" +
+                        $"RestaurantName={employee.Name} , OpeningTime={employee.OpeningHours}"
+                        );
+                }
             }
         }
     }
