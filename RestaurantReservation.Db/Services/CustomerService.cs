@@ -1,19 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RestaurantReservation.Db.Models;
+﻿using RestaurantReservation.Db.Models;
+using RestaurantReservation.Db.Repositories;
 
 namespace RestaurantReservation.Db.Services
 {
     public class CustomerService
     {
-        private readonly RestaurantReservationDbContext _context;
-        public CustomerService(RestaurantReservationDbContext context) 
+        private readonly CustomerRepository _customerRepository;
+        public CustomerService(CustomerRepository customerRepository) 
         {
-            _context = context;
+            _customerRepository = customerRepository;
         }
         public async Task<List<Customers>> CustomersWithSpecificReservationPartySize(string partySize)
         {
-            var customers =  await _context.Customers.FromSqlRaw($"EXEC dbo.ReservationWithSpecificPartySize '{partySize}'").ToListAsync();
-            return customers;
+            return await _customerRepository.CustomersWithSpecificReservationPartySize(partySize);
         }
     }
 }

@@ -3,39 +3,46 @@ using RestaurantReservation.Db.Models;
 
 namespace RestaurantReservation.Db.Repositories
 {
-    public class EmployeesRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly RestaurantReservationDbContext _context;
-        public EmployeesRepository(RestaurantReservationDbContext context)
+        public EmployeeRepository(RestaurantReservationDbContext context)
         {
             _context = context;
         }
-        public async Task<int> CreateEmployee(Employees newEmployee)
+        public async Task<int> CreateEmployeeAsync(Employees newEmployee)
         {
+            if (newEmployee == null)
+            {
+                throw new ArgumentNullException(nameof(newEmployee));
+            }
             await _context.Employees.AddAsync(newEmployee);
             await _context.SaveChangesAsync();
             return newEmployee.Id;
         }
-        public async Task<Employees> GetEmployee(int employeeId)
+        public async Task<Employees> GetEmployeeAsync(int employeeId)
         {
             return await _context.Employees.FindAsync(employeeId);
         }
-        public async Task DeleteEmployee(int employeeId)
+        public async Task DeleteEmployeeAsync(int employeeId)
         {
-            var employee = await GetEmployee(employeeId);
+            var employee = await GetEmployeeAsync(employeeId);
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateEmployee(Employees updateEmployee)
+        public async Task UpdateEmployeeAsync(Employees updateEmployee)
         {
+            if (await GetEmployeeAsync(updateEmployee.Id) == null)
+            {
+                throw new ArgumentNullException(nameof(updateEmployee));
+            }
             _context.Employees.Update(updateEmployee);
             await _context.SaveChangesAsync();
         }
-        public async Task<List<Employees>> ListManagers()
+        public async Task<List<Employees>> ListManagersAsync()
         {
-            var position = "Manager";
             var managers = await _context.Employees
-                .Where(a => a.Position == position)
+                .Where(a => a.Position == EmployeePositions.Manager)
                 .OrderBy(a => a.FirstName)
                 .ToListAsync();
             return managers;

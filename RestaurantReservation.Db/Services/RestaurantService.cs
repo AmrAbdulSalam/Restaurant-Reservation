@@ -1,19 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using RestaurantReservation.Db.Repositories;
 
 namespace RestaurantReservation.Db.Services
 {
     public class RestaurantService
     {
-        private readonly RestaurantReservationDbContext _context;
-        public RestaurantService(RestaurantReservationDbContext context) 
+        private readonly RestaurantRepository _restaurantRepository;
+        public RestaurantService(RestaurantRepository restaurantRepository) 
         {
-            _context = context;
+            _restaurantRepository = restaurantRepository;
         }
 
         public int CalculateTotalRevenure(int restaurantId)
         {
-            var result =  _context.Database.SqlQuery<int>($"SELECT dbo.TotalRevenuBySpecificRestaurant({restaurantId})").ToList().FirstOrDefault();
-            return result;
+            return _restaurantRepository.CalculateTotalRevenure(restaurantId);
         }
     }
 }

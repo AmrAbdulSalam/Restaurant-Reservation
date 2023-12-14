@@ -15,8 +15,8 @@ namespace RestaurantReservation
             //Get Customer by ID
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new CustomersRepository(context);
-                var customer = await repo.GetCustomer(6);
+                var repo = new CustomerRepository(context);
+                var customer = await repo.GetCustomerAsync(6);
                 var printCustomer = $"Id={customer.Id} , Name={customer.FirstName} {customer.LastName}";
                 Console.WriteLine(printCustomer);
             }
@@ -31,26 +31,26 @@ namespace RestaurantReservation
                     Email = "rami123@gmail.com",
                     PhoneNumber = "0599888811"
                 };
-                var repo = new CustomersRepository(context);
-                var id = await repo.CreateCustomer(newCustomer);
+                var repo = new CustomerRepository(context);
+                var id = await repo.CreateCustomerAsync(newCustomer);
                 Console.WriteLine(id);
             }
 
             //Delete Customer
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new CustomersRepository(context);
-                await repo.DeleteCustomer(6);
+                var repo = new CustomerRepository(context);
+                await repo.DeleteCustomerAsync(6);
             }
 
             //Update Customer
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new CustomersRepository(context);
-                var customer = await repo.GetCustomer(7);
+                var repo = new CustomerRepository(context);
+                var customer = await repo.GetCustomerAsync(7);
                 customer.FirstName = "Hello";
                 customer.Email = "hellp@gmail.com";
-                await repo.UpdateCustomer(customer);
+                await repo.UpdateCustomerAsync(customer);
             }
 
 
@@ -66,14 +66,14 @@ namespace RestaurantReservation
                     RestaurantsId = 2
                 };
                 var repo = new ReservationRepository(context);
-                var id = await repo.CreateReservation(reservation);
+                var id = await repo.CreateReservationAsync(reservation);
                 Console.WriteLine(id);
-                var getReservation = await repo.GetReservations(id);
+                var getReservation = await repo.GetReservationsAsync(id);
                 getReservation.PartySize = "Small";
                 getReservation.RestaurantsId = 5;
-                await repo.UpdateReservation(getReservation);
+                await repo.UpdateReservationAsync(getReservation);
 
-                await repo.DeleteReservation(id);
+                await repo.DeleteReservationAsync(id);
             }
 
             //   ---------------------------> Tables Repository <---------------------------
@@ -84,15 +84,15 @@ namespace RestaurantReservation
                     Capacity = "55",
                     RestaurantsId = 1,
                 };
-                var repo = new TablesRepository(context);
-                var id = await repo.CreateTable(table);
+                var repo = new TableRepository(context);
+                var id = await repo.CreateTableAsync(table);
                 Console.WriteLine(id);
-                var getReservation = await repo.GetTable(id);
+                var getReservation = await repo.GetTableAsync(id);
                 getReservation.Capacity = "10";
                 getReservation.RestaurantsId = 5;
-                await repo.UpdateTable(getReservation);
+                await repo.UpdateTableAsync(getReservation);
 
-                await repo.DeleteTable(id);
+                await repo.DeleteTableAsync(id);
             }
 
             //   ---------------------------> Orders Repository <---------------------------
@@ -105,15 +105,15 @@ namespace RestaurantReservation
                     ReservationsId = 1,
                     EmployeesId = 1,
                 };
-                var repo = new OrdersRepository(context);
-                var id = await repo.CreateOrder(order);
+                var repo = new OrderRepository(context);
+                var id = await repo.CreateOrderAsync(order);
                 Console.WriteLine(id);
-                var value = await repo.GetOrder(id);
+                var value = await repo.GetOrderAsync(id);
                 value.TotalAmount = 2000.99;
                 value.ReservationsId = 5;
-                await repo.UpdateOrder(value);
+                await repo.UpdateOrderAsync(value);
 
-                await repo.DeleteOrder(id);
+                await repo.DeleteOrderAsync(id);
             }
 
             //   ---------------------------> Employyes Repository <---------------------------
@@ -126,14 +126,14 @@ namespace RestaurantReservation
                     Position = "Maanager",
                     RestaurantsId = 1,
                 };
-                var repo = new EmployeesRepository(context);
-                var id = await repo.CreateEmployee(employee);
+                var repo = new EmployeeRepository(context);
+                var id = await repo.CreateEmployeeAsync(employee);
                 Console.WriteLine(id);
-                var value = await repo.GetEmployee(id);
+                var value = await repo.GetEmployeeAsync(id);
                 value.LastName = "Helmi";
-                await repo.UpdateEmployee(value);
+                await repo.UpdateEmployeeAsync(value);
 
-                await repo.DeleteEmployee(id);
+                await repo.DeleteEmployeeAsync(id);
             }
 
             //   ---------------------------> Restaurants Repository <---------------------------
@@ -146,14 +146,14 @@ namespace RestaurantReservation
                     PhoneNumber = "0599111111",
                     OpeningHours = "9:00AM-1:00PM"
                 };
-                var repo = new RestaurantsRepository(context);
-                var id = await repo.CreateRestaurant(restaurant);
+                var repo = new RestaurantRepository(context);
+                var id = await repo.CreateRestaurantAsync(restaurant);
                 Console.WriteLine(id);
-                var value = await repo.GetRestaurant(id);
+                var value = await repo.GetRestaurantAsync(id);
                 value.Address = "Hebron";
-                await repo.UpdateRestaurant(value);
+                await repo.UpdateRestaurantAsync(value);
 
-                await repo.DeleteRestaurant(id);
+                await repo.DeleteRestaurantAsync(id);
             }
 
             //   ---------------------------> OrderItems Repository <---------------------------
@@ -165,14 +165,14 @@ namespace RestaurantReservation
                     MenuItemsId = 1,
                     OrdersId = 9
                 };
-                var repo = new OrderItemsRepository(context);
-                var id = await repo.CreateOrderItem(orderItem);
+                var repo = new OrderItemRepository(context);
+                var id = await repo.CreateOrderItemAsync(orderItem);
                 Console.WriteLine(id);
-                var value = await repo.GetOrderItem(id);
+                var value = await repo.GetOrderItemAsync(id);
                 value.Quantity = 22;
-                await repo.UpdateOrderItem(value);
+                await repo.UpdateOrderItemAsync(value);
 
-                await repo.DeleteOrderItem(id);
+                await repo.DeleteOrderItemAsync(id);
             }
 
             //   ---------------------------> MenuItems Repository <---------------------------
@@ -185,21 +185,21 @@ namespace RestaurantReservation
                     Price = 55.5,
                     RestaurantsId = 1
                 };
-                var repo = new MenuItemsRepository(context);
-                var id = await repo.CreateMenuItem(menuItem);
+                var repo = new MenuItemRepository(context);
+                var id = await repo.CreateMenuItemAsync(menuItem);
                 Console.WriteLine(id);
-                var value = await repo.GetMenuItem(id);
+                var value = await repo.GetMenuItemAsync(id);
                 value.Price = 22.2;
-                await repo.UpdateMenuItem(value);
+                await repo.UpdateMenuItemAsync(value);
 
-                await repo.DeleteMenuItem(id);
+                await repo.DeleteMenuItemAsync(id);
             }
 
             //Task 10 (A)  --> ListManagers()
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new EmployeesRepository(context);
-                var manageers = await repo.ListManagers();
+                var repo = new EmployeeRepository(context);
+                var manageers = await repo.ListManagersAsync();
                 foreach (var manger in manageers)
                 {
                     Console.WriteLine($"Name={manger.FirstName} {manger.LastName}");
@@ -209,7 +209,7 @@ namespace RestaurantReservation
             using (var context = new RestaurantReservationDbContext())
             {
                 var repo = new ReservationRepository(context);
-                var reservations = await repo.GetReservationsByCustomer(1);
+                var reservations = await repo.GetReservationsByCustomerAsync(1);
                 foreach (var reservation in reservations)
                 {
                     Console.WriteLine($"Date={reservation.ReservationDate} , Size = {reservation.PartySize}");
@@ -218,8 +218,8 @@ namespace RestaurantReservation
             //Task 10 (C) --> List Orders And Menu Items
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new OrdersRepository(context);
-                var orders = await repo.ListOrdersAndMenuItems(1);
+                var repo = new OrderRepository(context);
+                var orders = await repo.ListOrdersAndMenuItemsAsync(1);
                 foreach (var order in orders)
                 {
                     Console.WriteLine($"OrderAmount={order.TotalAmount} , OrderDate={order.OrderDate}");
@@ -236,8 +236,8 @@ namespace RestaurantReservation
             //Task 10 (D) --> List Orders Menu
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new MenuItemsRepository(context);
-                var menus = await repo.ListOrderedMenuItems(2);
+                var repo = new MenuItemRepository(context);
+                var menus = await repo.ListOrderedMenuItemsAsync(2);
 
                 foreach (var menu in menus)
                 {
@@ -248,7 +248,7 @@ namespace RestaurantReservation
             //Task 10 (C) --> Average total amount for each employee
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new OrdersRepository(context);
+                var repo = new OrderRepository(context);
                 var average = repo.CalculateAverageOrderAmount(1);
                 Console.WriteLine($"Average is {average}");
 
@@ -283,7 +283,8 @@ namespace RestaurantReservation
             using (var context = new RestaurantReservationDbContext())
             {
                 var restaurantId = 1;
-                var restaurantService = new RestaurantService(context);
+                var restaurantRepo = new RestaurantRepository(context);
+                var restaurantService = new RestaurantService(restaurantRepo);
                 var value = restaurantService.CalculateTotalRevenure(restaurantId);
                 Console.WriteLine($"Total={value} by restaurant = {restaurantId}");
             }
@@ -291,7 +292,8 @@ namespace RestaurantReservation
             using (var context = new RestaurantReservationDbContext())
             {
                 Console.WriteLine("test");
-                var customerService = new CustomerService(context);
+                var cutomerRepo = new CustomerRepository(context);
+                var customerService = new CustomerService(cutomerRepo);
                 var customers = await customerService.CustomersWithSpecificReservationPartySize("small");
                 foreach (var customer in customers)
                 {
