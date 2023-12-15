@@ -5,7 +5,7 @@ namespace RestaurantReservation.Db.Models
     {
         public int Id { get; set; }
         public int RestaurantsId { get; set; }
-        public List<Reservations> ReservationId { get; set; } = new List<Reservations>();
+        public List<Reservations> ReservationsId { get; set; } = new List<Reservations>();
         public string? Capacity { get; set; }
     }
 }

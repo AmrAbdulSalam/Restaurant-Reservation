@@ -16,7 +16,7 @@ namespace RestaurantReservation
             using (var context = new RestaurantReservationDbContext())
             {
                 var repo = new CustomerRepository(context);
-                var customer = await repo.GetCustomerAsync(6);
+                var customer = await repo.GetCustomerAsync(2);
                 var printCustomer = $"Id={customer.Id} , Name={customer.FirstName} {customer.LastName}";
                 Console.WriteLine(printCustomer);
             }
@@ -40,14 +40,14 @@ namespace RestaurantReservation
             using (var context = new RestaurantReservationDbContext())
             {
                 var repo = new CustomerRepository(context);
-                await repo.DeleteCustomerAsync(6);
+                await repo.DeleteCustomerAsync(9);
             }
 
             //Update Customer
             using (var context = new RestaurantReservationDbContext())
             {
                 var repo = new CustomerRepository(context);
-                var customer = await repo.GetCustomerAsync(7);
+                var customer = await repo.GetCustomerAsync(3);
                 customer.FirstName = "Hello";
                 customer.Email = "hellp@gmail.com";
                 await repo.UpdateCustomerAsync(customer);

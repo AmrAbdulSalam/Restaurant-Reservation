@@ -22,17 +22,20 @@ namespace RestaurantReservation.Db.Repositories
             await _context.SaveChangesAsync();
             return newCustomer.Id;
         }
+
         public async Task DeleteCustomerAsync(int customerId)
         {
             var customer = await GetCustomerAsync(customerId);
             _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
         }
+
         public async Task<Customers> GetCustomerAsync(int customerId)
         {
             var customer = await _context.Customers.FindAsync(customerId);
             return customer;
         }
+
         public async Task UpdateCustomerAsync(Customers updatedCustomer)
         {
             if (await GetCustomerAsync(updatedCustomer.Id) == null)
@@ -42,6 +45,7 @@ namespace RestaurantReservation.Db.Repositories
             _context.Customers.Update(updatedCustomer);
             await _context.SaveChangesAsync();
         }
+
         public async Task<List<Customers>> CustomersWithSpecificReservationPartySize(string partySize)
         {
             var customers = await _context.Customers.FromSqlRaw($"EXEC dbo.ReservationWithSpecificPartySize '{partySize}'").ToListAsync();
