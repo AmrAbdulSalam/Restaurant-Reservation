@@ -14,7 +14,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<RestaurantReservationDbContext>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IEmployeeService , EmployeeService>();
-
+builder.Services.AddScoped<IReservationService , ReservationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
