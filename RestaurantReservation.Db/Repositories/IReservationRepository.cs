@@ -36,5 +36,12 @@ namespace RestaurantReservation.Db.Repositories
         /// </summary>
         /// <param name="updateReservation">Passing reservation entity</param>
         Task UpdateReservationAsync(Reservations updateReservation);
+
+        /// <summary>
+        /// Check if reservation exists in the database
+        /// </summary>
+        /// <param name="reservationId">Passing an existing reservation id</param>
+        /// <returns>bool value if the reservation is found or not</returns>
+        Task<bool> ResevationExists(int reservationId);
     }
 }

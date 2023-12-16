@@ -31,5 +31,12 @@ namespace RestaurantReservation.Db.Repositories
         /// <param name="updateEmployee">Passing The created employee entity</param>
         /// <returns></returns>
         Task UpdateEmployeeAsync(Employees updateEmployee);
+
+        /// <summary>
+        /// Check if employee exists in the database
+        /// </summary>
+        /// <param name="employeeId">Passing an existing employee id</param>
+        /// <returns>bool value if the employee is found or not</returns>
+        Task<bool> EmployeeExists(int employeeId);
     }
 }

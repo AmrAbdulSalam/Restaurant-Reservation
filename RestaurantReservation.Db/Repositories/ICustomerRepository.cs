@@ -32,5 +32,12 @@ namespace RestaurantReservation.Db.Repositories
         /// <param name="updatedCustomer">Passing an existing customer as parameter</param>
         /// <returns></returns>
         Task UpdateCustomerAsync(Customers updatedCustomer);
+
+        /// <summary>
+        /// Check if customer exists in the database
+        /// </summary>
+        /// <param name="customerId">Passing an existing customer id</param>
+        /// <returns>bool value if the customer is found or not</returns>
+        Task<bool> CustomerExists(int customerId);
     }
 }

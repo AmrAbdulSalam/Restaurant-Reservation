@@ -37,7 +37,7 @@ namespace RestaurantReservation.Db.Repositories
 
         public async Task UpdateEmployeeAsync(Employees updateEmployee)
         {
-            if (await GetEmployeeAsync(updateEmployee.Id) == null)
+            if (!await EmployeeExists(updateEmployee.Id))
             {
                 throw new ArgumentNullException(nameof(updateEmployee));
             }
@@ -52,6 +52,11 @@ namespace RestaurantReservation.Db.Repositories
                 .OrderBy(a => a.FirstName)
                 .ToListAsync();
             return managers;
+        }
+
+        public async Task<bool> EmployeeExists(int employeeId)
+        {
+            return await _context.Employees.AnyAsync(employee => employee.Id == employeeId);
         }
     }
 }
