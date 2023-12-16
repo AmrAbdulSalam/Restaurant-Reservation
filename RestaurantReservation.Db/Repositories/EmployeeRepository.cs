@@ -6,10 +6,12 @@ namespace RestaurantReservation.Db.Repositories
     public class EmployeeRepository : IEmployeeRepository
     {
         private readonly RestaurantReservationDbContext _context;
+
         public EmployeeRepository(RestaurantReservationDbContext context)
         {
             _context = context;
         }
+
         public async Task<int> CreateEmployeeAsync(Employees newEmployee)
         {
             if (newEmployee == null)
@@ -20,16 +22,19 @@ namespace RestaurantReservation.Db.Repositories
             await _context.SaveChangesAsync();
             return newEmployee.Id;
         }
+
         public async Task<Employees> GetEmployeeAsync(int employeeId)
         {
             return await _context.Employees.FindAsync(employeeId);
         }
+
         public async Task DeleteEmployeeAsync(int employeeId)
         {
             var employee = await GetEmployeeAsync(employeeId);
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
         }
+
         public async Task UpdateEmployeeAsync(Employees updateEmployee)
         {
             if (await GetEmployeeAsync(updateEmployee.Id) == null)
@@ -39,6 +44,7 @@ namespace RestaurantReservation.Db.Repositories
             _context.Employees.Update(updateEmployee);
             await _context.SaveChangesAsync();
         }
+
         public async Task<List<Employees>> ListManagersAsync()
         {
             var managers = await _context.Employees

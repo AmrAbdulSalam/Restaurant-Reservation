@@ -5,10 +5,12 @@ namespace RestaurantReservation.Db.Repositories
     public class OrderItemRepository : IOrderItemRepository
     {
         private readonly RestaurantReservationDbContext _context;
+
         public OrderItemRepository(RestaurantReservationDbContext context)
         {
             _context = context;
         }
+
         public async Task<int> CreateOrderItemAsync(OrderItems newOrderItem)
         {
             if (newOrderItem == null)
@@ -19,16 +21,19 @@ namespace RestaurantReservation.Db.Repositories
             await _context.SaveChangesAsync();
             return newOrderItem.Id;
         }
+
         public async Task<OrderItems> GetOrderItemAsync(int orderItemId)
         {
             return await _context.OrderItems.FindAsync(orderItemId);
         }
+
         public async Task DeleteOrderItemAsync(int orderItemTable)
         {
             var orderItem = await GetOrderItemAsync(orderItemTable);
             _context.OrderItems.Remove(orderItem);
             await _context.SaveChangesAsync();
         }
+
         public async Task UpdateOrderItemAsync(OrderItems updateOrderItem)
         {
             if (await GetOrderItemAsync(updateOrderItem.Id) == null)

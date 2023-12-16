@@ -15,10 +15,12 @@ namespace RestaurantReservation.Db
         public DbSet<MenuItems> MenuItems { get; set; }
         public DbSet<ReservationsWithCustomerAndRestaurantInfo> View_ReservationsWithCustomerAndRestaurantInfo { get; set; }
         public DbSet<EmployeesWithRespectiveRestaurant> View_EmployeesWithRespectiveRestaurant { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=DESKTOP-NUK8KNC\\SQLEXPRESS;Initial Catalog=RestaurantReservationCore;Integrated Security=True;Trust Server Certificate=True");
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReservationsWithCustomerAndRestaurantInfo>().HasNoKey().ToView("View_ReservationsWithCustomerAndRestaurantInfo");
