@@ -284,7 +284,7 @@ namespace RestaurantReservation
             {
                 var restaurantId = 1;
                 var restaurantRepo = new RestaurantRepository(context);
-                var restaurantService = new RestaurantService(restaurantRepo);
+                var restaurantService = new RestaurantService(context);
                 var value = restaurantService.CalculateTotalRevenure(restaurantId);
                 Console.WriteLine($"Total={value} by restaurant = {restaurantId}");
             }
@@ -293,7 +293,7 @@ namespace RestaurantReservation
             {
                 Console.WriteLine("test");
                 var cutomerRepo = new CustomerRepository(context);
-                var customerService = new CustomerService(cutomerRepo);
+                var customerService = new CustomerService(context);
                 var customers = await customerService.CustomersWithSpecificReservationPartySize("small");
                 foreach (var customer in customers)
                 {

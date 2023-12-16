@@ -1,4 +1,5 @@
-﻿using RestaurantReservation.Db.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantReservation.Db.Models;
 using RestaurantReservation.Db.Repositories;
 
 namespace RestaurantReservation.Db.Services
@@ -6,10 +7,12 @@ namespace RestaurantReservation.Db.Services
     public class EmployeeService : IEmployeeService
     {
         private readonly EmployeeRepository _employeeRepository;
+        private readonly RestaurantReservationDbContext _dbContext;
 
-        public EmployeeService(EmployeeRepository employeeRepository)
+        public EmployeeService(RestaurantReservationDbContext dbContext)
         {
-            _employeeRepository = employeeRepository;
+            _dbContext = dbContext;
+            _employeeRepository = new EmployeeRepository(_dbContext);
         }
 
         public async Task<int> CreateEmployeeAsync(Employees newEmployee)

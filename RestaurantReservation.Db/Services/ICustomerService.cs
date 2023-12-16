@@ -29,5 +29,13 @@ namespace RestaurantReservation.Db.Services
         /// </summary>
         /// <param name="updatedCustomer">Passing an existing customer as parameter</param>
         Task UpdateCustomerAsync(Customers updatedCustomer);
+
+
+        /// <summary>
+        /// Geting Customers based on party size
+        /// </summary>
+        /// <param name="partySize">Pass a parrty size (small,medium ..)</param>
+        /// <returns>List of Customers</returns>
+        Task<List<Customers>> CustomersWithSpecificReservationPartySize(string partySize);
     }
 }

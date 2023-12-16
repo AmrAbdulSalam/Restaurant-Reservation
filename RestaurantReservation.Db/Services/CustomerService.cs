@@ -6,10 +6,12 @@ namespace RestaurantReservation.Db.Services
     public class CustomerService : ICustomerService
     {
         private readonly CustomerRepository _customerRepository;
+        private readonly RestaurantReservationDbContext _dbContext;
 
-        public CustomerService(CustomerRepository customerRepository)
+        public CustomerService(RestaurantReservationDbContext dbContext)
         {
-            _customerRepository = customerRepository;
+            _dbContext = dbContext;
+            _customerRepository = new CustomerRepository(_dbContext);
         }
 
         public async Task<List<Customers>> CustomersWithSpecificReservationPartySize(string partySize)

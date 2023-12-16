@@ -5,10 +5,12 @@ namespace RestaurantReservation.Db.Services
     public class RestaurantService
     {
         private readonly RestaurantRepository _restaurantRepository;
+        private readonly RestaurantReservationDbContext _dbContext;
 
-        public RestaurantService(RestaurantRepository restaurantRepository) 
+        public RestaurantService(RestaurantReservationDbContext dbContext) 
         {
-            _restaurantRepository = restaurantRepository;
+            _dbContext = dbContext;
+            _restaurantRepository = new RestaurantRepository(_dbContext);
         }
 
         public int CalculateTotalRevenure(int restaurantId)

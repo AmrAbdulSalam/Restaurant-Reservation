@@ -6,10 +6,12 @@ namespace RestaurantReservation.Db.Services
     public class ReservationService : IReservationService
     {
         private readonly ReservationRepository _reservationRepository;
+        private readonly RestaurantReservationDbContext _dbContext;
 
-        public ReservationService(ReservationRepository reservationRepository)
+        public ReservationService(RestaurantReservationDbContext dbContext)
         {
-            _reservationRepository = reservationRepository;
+            _dbContext = dbContext;
+            _reservationRepository = new ReservationRepository(_dbContext);
         }
 
         public async Task<int> CreateReservationAsync(Reservations reservation)
