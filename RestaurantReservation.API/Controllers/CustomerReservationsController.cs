@@ -29,7 +29,7 @@ namespace RestaurantReservation.API.Controllers
 
             if (!customerExists)
             {
-                return NotFound();
+                return NotFound("No customer found");
             }
 
             var reservations = await _reservationService.GetReservationsByCustomerAsync(customerId);

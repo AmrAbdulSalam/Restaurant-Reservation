@@ -28,7 +28,7 @@ namespace RestaurantReservation.API.Controllers
 
             if (customer == null)
             {
-                return NotFound();
+                return NotFound("No customer found");
             }
 
             return Ok(_mapper.Map<CustomerDTO>(customer));
@@ -59,7 +59,7 @@ namespace RestaurantReservation.API.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
+                return NotFound("No customer found");
             }
         }
 
@@ -77,7 +77,7 @@ namespace RestaurantReservation.API.Controllers
             }
             catch(Exception ex)
             {
-                return NotFound();
+                return NotFound("No customer found");
             }
         }
     }

@@ -24,7 +24,7 @@ namespace RestaurantReservation.API.Controllers
 
             if (!reservationExists) 
             {
-                return NotFound();
+                return NotFound("No reservation found");
             }
 
             return Ok(await _reservationService.ListOrdersAndMenuItemsAsync(reservationId));
@@ -37,7 +37,7 @@ namespace RestaurantReservation.API.Controllers
 
             if (!reservationExists)
             {
-                return NotFound();
+                return NotFound("No reservation found");
             }
 
             return Ok(await _reservationService.ListOrderedMenuItemsAsync(reservationId));

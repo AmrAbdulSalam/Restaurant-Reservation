@@ -31,7 +31,7 @@ namespace RestaurantReservation.API.Controllers
 
             if (!userExists)
             {
-                return NotFound();
+                return NotFound("No user found");
             }
 
             var token = _tokenService.Authenticate(newUser);
