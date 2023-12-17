@@ -21,6 +21,7 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK , Type = typeof(List<EmployeeDTO>))]
         public async Task<ActionResult<List<EmployeeDTO>>> ListManagersAsync()
         {
             var managersList = await _employeeService.ListManagersAsync();

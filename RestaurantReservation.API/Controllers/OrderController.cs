@@ -18,6 +18,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpGet("orders")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK , Type = typeof(List<Orders>))]
         public async Task<ActionResult<List<Orders>>> GetOrderList(int reservationId)
         {
             var reservationExists = await _reservationService.ResevationExists(reservationId);
@@ -31,6 +33,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpGet("menu-items")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<MenuItems>))]
         public async Task<ActionResult<List<MenuItems>>> GetMenuItemList(int reservationId)
         {
             var reservationExists = await _reservationService.ResevationExists(reservationId);

@@ -23,6 +23,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpGet("{customerId}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK , Type = typeof(List<ReservationDTO>))]
         public async Task<ActionResult<List<ReservationDTO>>> GetCustomerReservationsAsync(int customerId)
         {
             var customerExists = await _customerService.CustomerExists(customerId);

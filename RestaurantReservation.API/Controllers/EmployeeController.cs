@@ -22,6 +22,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpGet("{employeeId}", Name = "GetEmployeeById")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK , Type = typeof(EmployeeDTO))]
         public async Task<ActionResult<EmployeeDTO>> GetEmployeeAsync(int employeeId)
         {
             var employee = await _employeeService.GetEmployeeAsync(employeeId);
@@ -35,6 +37,7 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<EmployeeDTO>> CreateEmployeeAsync(EmployeeForCreationDTO newEmployee)
         {
             var newEmployeeId = await _employeeService.CreateEmployeeAsync(_mapper.Map<Employees>(newEmployee));
@@ -50,6 +53,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpDelete("{employeeId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteEmployeeAsync(int employeeId)
         {
             try
@@ -64,6 +69,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpPut("{employeeId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> UpdateEmployeeAsync(int employeeId, EmployeeDTO updatedEmployee)
         {
             var employee = _mapper.Map<Employees>(updatedEmployee);

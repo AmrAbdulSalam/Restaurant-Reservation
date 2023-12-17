@@ -22,6 +22,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpGet("{reservationId}", Name = "GetReservationById")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK , Type = typeof(ReservationDTO))]
         public async Task<ActionResult<ReservationDTO>> GetReservationAsync(int reservationId)
         {
             var reservation = await _reservationService.GetReservationsAsync(reservationId);
@@ -35,6 +37,7 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<ReservationDTO>> CreateReservationAsync(ReservationForCreationDTO newReservation)
         {
             var newReservationId = await _reservationService.CreateReservationAsync(_mapper.Map<Reservations>(newReservation));
@@ -50,6 +53,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpDelete("{reservationId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteReservationAsync(int reservationId)
         {
             try
@@ -64,6 +69,8 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpPut("{reservationId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> UpdateReservationAsync(int reservationId, ReservationDTO updatedReservation)
         {
             var reservation = _mapper.Map<Reservations>(updatedReservation);

@@ -17,6 +17,7 @@ namespace RestaurantReservation.API.Controllers
         }
 
         [HttpGet("average-order-amount")]
+        [ProducesResponseType(StatusCodes.Status200OK , Type = typeof(double))]
         public ActionResult<double> CalculateAverageOrderAmount(int employeeId)
         {
             return Ok(_employeeService.CalculateAverageOrderAmount(employeeId));
