@@ -218,7 +218,7 @@ namespace RestaurantReservation
             //Task 10 (C) --> List Orders And Menu Items
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new OrderRepository(context);
+                var repo = new ReservationRepository(context);
                 var orders = await repo.ListOrdersAndMenuItemsAsync(1);
                 foreach (var order in orders)
                 {
@@ -236,7 +236,7 @@ namespace RestaurantReservation
             //Task 10 (D) --> List Orders Menu
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new MenuItemRepository(context);
+                var repo = new ReservationRepository(context);
                 var menus = await repo.ListOrderedMenuItemsAsync(2);
 
                 foreach (var menu in menus)
@@ -248,7 +248,7 @@ namespace RestaurantReservation
             //Task 10 (C) --> Average total amount for each employee
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new OrderRepository(context);
+                var repo = new EmployeeRepository(context);
                 var average = repo.CalculateAverageOrderAmount(1);
                 Console.WriteLine($"Average is {average}");
 
@@ -284,7 +284,7 @@ namespace RestaurantReservation
             {
                 var restaurantId = 1;
                 var restaurantRepo = new RestaurantRepository(context);
-                var restaurantService = new RestaurantService(restaurantRepo);
+                var restaurantService = new RestaurantService(context);
                 var value = restaurantService.CalculateTotalRevenure(restaurantId);
                 Console.WriteLine($"Total={value} by restaurant = {restaurantId}");
             }
@@ -293,7 +293,7 @@ namespace RestaurantReservation
             {
                 Console.WriteLine("test");
                 var cutomerRepo = new CustomerRepository(context);
-                var customerService = new CustomerService(cutomerRepo);
+                var customerService = new CustomerService(context);
                 var customers = await customerService.CustomersWithSpecificReservationPartySize("small");
                 foreach (var customer in customers)
                 {

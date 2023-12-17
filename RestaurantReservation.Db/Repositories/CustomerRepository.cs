@@ -38,7 +38,7 @@ namespace RestaurantReservation.Db.Repositories
 
         public async Task UpdateCustomerAsync(Customers updatedCustomer)
         {
-            if (await GetCustomerAsync(updatedCustomer.Id) == null)
+            if (!await CustomerExists(updatedCustomer.Id))
             {
                 throw new ArgumentNullException(nameof(updatedCustomer));
             }
@@ -50,6 +50,11 @@ namespace RestaurantReservation.Db.Repositories
         {
             var customers = await _context.Customers.FromSqlRaw($"EXEC dbo.ReservationWithSpecificPartySize '{partySize}'").ToListAsync();
             return customers;
+        }
+
+        public async Task<bool> CustomerExists(int customerId)
+        {
+            return await _context.Customers.AnyAsync(customer => customer.Id == customerId);
         }
     }
 }

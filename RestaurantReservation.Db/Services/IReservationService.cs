@@ -1,8 +1,8 @@
 ﻿using RestaurantReservation.Db.Models;
 
-namespace RestaurantReservation.Db.Repositories
+namespace RestaurantReservation.Db.Services
 {
-    public interface IReservationRepository
+    public interface IReservationService
     {
         /// <summary>
         /// Create a new reservation
@@ -43,5 +43,19 @@ namespace RestaurantReservation.Db.Repositories
         /// <param name="reservationId">Passing an existing reservation id</param>
         /// <returns>bool value if the reservation is found or not</returns>
         Task<bool> ResevationExists(int reservationId);
+
+        /// <summary>
+        /// Finds the menu items ordered in that specific reservation
+        /// </summary>
+        /// <param name="reservationId">Passing an existing customer id</param>
+        /// <returns>list of menu items</returns>
+        Task<List<MenuItems>> ListOrderedMenuItemsAsync(int reservationId);
+
+        /// <summary>
+        /// List orders placed on specific reservation
+        /// </summary>
+        /// <param name="reservationId">Passing an existing customer id</param>
+        /// <returns>List of orders</returns>
+        Task<List<Orders>> ListOrdersAndMenuItemsAsync(int reservationId);
     }
 }
