@@ -44,5 +44,10 @@ namespace RestaurantReservation.Db.Services
         {
             return await _employeeRepository.EmployeeExists(employeeId);
         }
+
+        public double CalculateAverageOrderAmount(int employeeId)
+        {
+            return _employeeRepository.CalculateAverageOrderAmount(employeeId);
+        }
     }
 }

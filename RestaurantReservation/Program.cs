@@ -218,7 +218,7 @@ namespace RestaurantReservation
             //Task 10 (C) --> List Orders And Menu Items
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new OrderRepository(context);
+                var repo = new ReservationRepository(context);
                 var orders = await repo.ListOrdersAndMenuItemsAsync(1);
                 foreach (var order in orders)
                 {
@@ -236,7 +236,7 @@ namespace RestaurantReservation
             //Task 10 (D) --> List Orders Menu
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new MenuItemRepository(context);
+                var repo = new ReservationRepository(context);
                 var menus = await repo.ListOrderedMenuItemsAsync(2);
 
                 foreach (var menu in menus)
@@ -248,7 +248,7 @@ namespace RestaurantReservation
             //Task 10 (C) --> Average total amount for each employee
             using (var context = new RestaurantReservationDbContext())
             {
-                var repo = new OrderRepository(context);
+                var repo = new EmployeeRepository(context);
                 var average = repo.CalculateAverageOrderAmount(1);
                 Console.WriteLine($"Average is {average}");
 

@@ -58,5 +58,13 @@ namespace RestaurantReservation.Db.Repositories
         {
             return await _context.Employees.AnyAsync(employee => employee.Id == employeeId);
         }
+
+        public double CalculateAverageOrderAmount(int employeeId)
+        {
+            var average = _context.Orders
+                .Where(a => a.EmployeesId == employeeId)
+                .Average(a => a.TotalAmount);
+            return average;
+        }
     }
 }

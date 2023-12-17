@@ -44,23 +44,5 @@ namespace RestaurantReservation.Db.Repositories
             _context.Orders.Update(updateOrder);
             await _context.SaveChangesAsync();
         }
-
-        public async Task<List<Orders>> ListOrdersAndMenuItemsAsync(int reservationId)
-        {
-            var orderList = await _context.Orders
-                .Where(a => a.ReservationsId == reservationId)
-                .Include(orderItem => orderItem.OrderItemsId)
-                .ThenInclude(menu => menu.MenuItems)
-                .ToListAsync();
-            return orderList;
-        }
-
-        public double CalculateAverageOrderAmount(int employeeId)
-        {
-            var average = _context.Orders
-                .Where(a => a.EmployeesId == employeeId)
-                .Average(a => a.TotalAmount);
-            return average;
-        }
     }
 }

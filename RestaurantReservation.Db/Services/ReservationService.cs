@@ -43,5 +43,15 @@ namespace RestaurantReservation.Db.Services
         {
             return await _reservationRepository.ResevationExists(reservationId);
         }
+
+        public async Task<List<MenuItems>> ListOrderedMenuItemsAsync(int reservationId)
+        {
+            return await _reservationRepository.ListOrderedMenuItemsAsync(reservationId);
+        }
+
+        public async Task<List<Orders>> ListOrdersAndMenuItemsAsync(int reservationId)
+        {
+            return await _reservationRepository.ListOrdersAndMenuItemsAsync(reservationId);
+        }
     }
 }

@@ -42,5 +42,12 @@ namespace RestaurantReservation.Db.Services
         /// <param name="employeeId">Passing an existing employee id</param>
         /// <returns>bool value if the employee is found or not</returns>
         Task<bool> EmployeeExists(int employeeId);
+
+        /// <summary>
+        /// Calcualte the average orders for employee
+        /// </summary>
+        /// <param name="employeeId">Passing existing employee id</param>
+        /// <returns>Average number of orders</returns>
+        double CalculateAverageOrderAmount(int employeeId);
     }
 }
