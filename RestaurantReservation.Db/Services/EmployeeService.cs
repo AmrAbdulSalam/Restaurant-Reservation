@@ -39,5 +39,10 @@ namespace RestaurantReservation.Db.Services
         {
             return await _employeeRepository.ListManagersAsync();
         }
+
+        public async Task<bool> EmployeeExists(int employeeId)
+        {
+            return await _employeeRepository.EmployeeExists(employeeId);
+        }
     }
 }

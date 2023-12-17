@@ -37,5 +37,12 @@ namespace RestaurantReservation.Db.Services
         /// <param name="partySize">Pass a parrty size (small,medium ..)</param>
         /// <returns>List of Customers</returns>
         Task<List<Customers>> CustomersWithSpecificReservationPartySize(string partySize);
+
+        /// <summary>
+        /// Check if customer exists in the database
+        /// </summary>
+        /// <param name="customerId">Passing an existing customer id</param>
+        /// <returns>bool value if the customer is found or not</returns>
+        Task<bool> CustomerExists(int customerId);
     }
 }

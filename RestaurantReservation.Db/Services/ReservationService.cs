@@ -38,5 +38,10 @@ namespace RestaurantReservation.Db.Services
         {
             return await _reservationRepository.GetReservationsByCustomerAsync(customerId);
         }
+
+        public async Task<bool> ResevationExists(int reservationId)
+        {
+            return await _reservationRepository.ResevationExists(reservationId);
+        }
     }
 }
