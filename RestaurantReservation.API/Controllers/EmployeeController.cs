@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.API.Models;
 using RestaurantReservation.Db.Models;
@@ -6,6 +7,7 @@ using RestaurantReservation.Db.Services;
 
 namespace RestaurantReservation.API.Controllers
 {
+    [Authorize]
     [Route("api/employees")]
     [ApiController]
     public class EmployeeController : ControllerBase

@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestaurantReservation.Db.Services;
 
 namespace RestaurantReservation.API.Controllers
 {
+    [Authorize]
     [Route("api/employees/{employeeId}")]
     [ApiController]
     public class EmployeeOrdersController : ControllerBase
