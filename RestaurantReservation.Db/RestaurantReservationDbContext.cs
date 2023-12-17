@@ -15,6 +15,7 @@ namespace RestaurantReservation.Db
         public DbSet<MenuItems> MenuItems { get; set; }
         public DbSet<ReservationsWithCustomerAndRestaurantInfo> View_ReservationsWithCustomerAndRestaurantInfo { get; set; }
         public DbSet<EmployeesWithRespectiveRestaurant> View_EmployeesWithRespectiveRestaurant { get; set; }
+        public DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
